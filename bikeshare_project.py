@@ -107,7 +107,7 @@ while True:
             break
         else:
             print('Sorry - can you type global or segment?')
-
+#A menu allows the user to choose from six data options - numeric selection from the user calls on functions defined above
     print('\nDone!\n')
     while True:
         print('\nChoose from the menu \n\n 1. A sample of the dataframe \n 2. Time Stats: most frequent times of travel \n 3. Station Stats: most popular stations and trips \n 4. Trip Duration Stats: total and average trip duration \n 5. User Stats: bikeshare users \n 6. Show me all stats!\n')
@@ -157,7 +157,7 @@ while True:
             print(duration_stats(df['Trip Duration']))
             print('\n----------User Stats----------\n')
             print(user_stats(df['User Type'], df['Gender'], df['Birth Year']))
-
+#the loop below allows the user to make unlimited subsequent menu selections
         more = input('\nWould you like to see more from current dataframe?: ').title()
         while True:
             if more == 'No' or more == 'Yes':
@@ -169,7 +169,7 @@ while True:
             break
         if more == 'Yes':
             continue
-
+#the loop below allows the user to create a new dataframe without exiting and restarting the program
     answer = input('\nType new to start over with a new dataframe, or type exit to quit the program\n').title()
     while True:
         if answer == 'New' or answer == 'Exit':
