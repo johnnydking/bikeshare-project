@@ -6,7 +6,7 @@ import pandas as pd
 CITY_DATA = {'Chicago': 'chicago.csv', 'New York City': 'new_york_city.csv', 'Washington': 'washington.csv'}
 #define functions
 def load_data(city, month, day):
-    print('Preparing dataframe!...')
+    print('Preparing dataframe!...', flush=True)
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
     df['month'] = df['Start Time'].dt.month_name()
@@ -25,7 +25,7 @@ def load_data(city, month, day):
     return df
 
 def load_global():
-    print('Preparing dataframe!...')
+    print('Preparing dataframe!...', flush=True)
     df1 = pd.read_csv('chicago.csv')
     df2 = pd.read_csv('new_york_city.csv')
     df3 = pd.read_csv('washington.csv')
