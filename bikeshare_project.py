@@ -56,6 +56,8 @@ def user_stats(type, gender, year):
     cust_total = len(type[type == 'Customer'])
     male_total = len(gender[gender == 'Male'])
     female_total = len(gender[gender == 'Female'])
+    male_perc = int(male_total / (male_total + female_total +.0001) * 100)
+    female_perc = int(female_total / (male_total + female_total + .0001) * 100)
     early_year = int(year.min())
     late_year = int(year.max())
     common_year = int(year.mode()[0])
@@ -70,7 +72,11 @@ def user_stats(type, gender, year):
         late_year = 'not available'
     if common_year == 0:
         common_year = 'not available'
-    return('The total number of subscribers was {}\nThe total number of customers was {}\nThe number of male users was {}\nThe number of female users was {}\nThe earliest birth year was {}\nThe most recent birth year was {}\nThe most common birth year was {}'.format(sub_total, cust_total, male_total, female_total, early_year, late_year, common_year))
+    if male_perc == 0:
+        male_perc = 'not available'
+    if female_perc == 0:
+        female_perc = 'not available'
+    return('The total number of subscribers was {}\nThe total number of customers was {}\nThe number of male users was {}\nThe percentage of users that were male was {}%\nThe number of female users was {}\nThe percentage of users that were female was {}%\nThe earliest birth year was {}\nThe most recent birth year was {}\nThe most common birth year was {}'.format(sub_total, cust_total, male_total, male_perc, female_total, female_perc, early_year, late_year, common_year))
 
 print('\nGreetings - let\'s explore bikeshare data! The first 6 months of 2017 are observed for three cities: Chicago, New York City and Washington.')
 #loops and conditions to request and validate input; choose dataframe type, specify segment(s), call function, option to call additional function(s), restart with new dataframe or exit program
@@ -107,7 +113,7 @@ while True:
             break
         else:
             print('Sorry - can you type global or segment?')
-#A menu allows the user to choose from six data options - numeric selection from the user calls on functions defined above
+
     print('\nDone!\n')
     while True:
         print('\nChoose from the menu \n\n 1. A sample of the dataframe \n 2. Time Stats: most frequent times of travel \n 3. Station Stats: most popular stations and trips \n 4. Trip Duration Stats: total and average trip duration \n 5. User Stats: bikeshare users \n 6. Show me all stats!\n')
@@ -157,7 +163,7 @@ while True:
             print(duration_stats(df['Trip Duration']))
             print('\n----------User Stats----------\n')
             print(user_stats(df['User Type'], df['Gender'], df['Birth Year']))
-#the loop below allows the user to make unlimited subsequent menu selections
+
         more = input('\nWould you like to see more from current dataframe?: ').title()
         while True:
             if more == 'No' or more == 'Yes':
@@ -169,7 +175,7 @@ while True:
             break
         if more == 'Yes':
             continue
-#the loop below allows the user to create a new dataframe without exiting and restarting the program
+
     answer = input('\nType new to start over with a new dataframe, or type exit to quit the program\n').title()
     while True:
         if answer == 'New' or answer == 'Exit':
