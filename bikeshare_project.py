@@ -54,6 +54,8 @@ def duration_stats(duration):
 def user_stats(type, gender, year):
     sub_total = len(type[type == 'Subscriber'])
     cust_total = len(type[type == 'Customer'])
+    sub_perc = int(sub_total / (sub_total + cust_total) * 100)
+    cust_perc = int(cust_total / (sub_total + cust_total) * 100)
     male_total = len(gender[gender == 'Male'])
     female_total = len(gender[gender == 'Female'])
     male_perc = int(male_total / (male_total + female_total +.0001) * 100)
@@ -76,7 +78,7 @@ def user_stats(type, gender, year):
         male_perc = 'not available'
     if female_perc == 0:
         female_perc = 'not available'
-    return('The total number of subscribers was {}\nThe total number of customers was {}\nThe number of male users was {}\nThe percentage of users that were male was {}%\nThe number of female users was {}\nThe percentage of users that were female was {}%\nThe earliest birth year was {}\nThe most recent birth year was {}\nThe most common birth year was {}'.format(sub_total, cust_total, male_total, male_perc, female_total, female_perc, early_year, late_year, common_year))
+    return('The total number of subscribers was {}\nThe percentage of users that were subscribers was {}%\nThe total number of customers was {}\nThe percentage of users that were customers was {}%\nThe number of male users was {}\nThe percentage of users that were male was {}%\nThe number of female users was {}\nThe percentage of users that were female was {}%\nThe earliest birth year was {}\nThe most recent birth year was {}\nThe most common birth year was {}'.format(sub_total, sub_perc, cust_total, cust_perc, male_total, male_perc, female_total, female_perc, early_year, late_year, common_year))
 
 print('\nGreetings - let\'s explore bikeshare data! The first 6 months of 2017 are observed for three cities: Chicago, New York City and Washington.')
 #loops and conditions to request and validate input; choose dataframe type, specify segment(s), call function, option to call additional function(s), restart with new dataframe or exit program
